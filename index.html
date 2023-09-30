@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coca-Cola Homepage</title>
+    <style>
+      /* Reset some default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Basic styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ff0000; /* Coca-Cola red */
+      }
+
+      header {
+        background-color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #ff0000; /* Coca-Cola red */
+      }
+
+      /* Animation styles */
+      .coca-cola-bottle {
+        width: 200px;
+        position: absolute;
+        bottom: 15px;
+        left: 75%;
+        transform: translateX(-50%);
+        animation: float 4s ease-in-out infinite;
+      }
+
+      .ice-cubes {
+        width: 200px;
+        position: absolute;
+        bottom: 0;
+        left: 75%;
+        transform: translateX(-50%);
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-20px);
+        }
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      /* Interactive button */
+      .order-button {
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #ff0000; /* Coca-Cola red */
+        color: #fff;
+        font-size: 18px;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.5s ease;
+      }
+
+      .order-button:hover {
+        background-color: #cc0000; /* Slightly darker red on hover */
+      }
+
+      .order-button.spin {
+        transform: rotate(360deg);
+      }
+
+      /* Form styles */
+      .order-form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+      }
+
+      .form-field {
+        margin-bottom: 10px;
+      }
+      /* CSS for the history section */
+      .history-section {
+        padding: 40px;
+        background-color: #fff;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+      }
+
+      .history-content {
+        text-align: center;
+      }
+
+      .history-images {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .history-images img {
+        width: 200px;
+        height: auto;
+        margin: 10px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+      }
+
+      /* Fade-in animation for images */
+      .fade-in {
+        animation: fade-in 1s ease-in-out forwards;
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Coca-Cola</h1>
+      <p>Enjoy the refreshing taste!</p>
+    </header>
+
+    <!-- Animated Coca-Cola bottle -->
+    <img
+      class="coca-cola-bottle"
+      style="width: 10%"
+      src="coca-cola-png-10978.png"
+      alt="Coca-Cola Bottle"
+    />
+    <img
+      src="Ice-Cube-PNG-Background.png"
+      alt="icecubes"
+      class="ice-cubes"
+      style="width: 50%"
+    />
+
+    <!-- Interactive order button -->
+    <button class="order-button">Login</button>
+    <button class="order-button">About us</button>
+    <button class="order-button">Contact</button>
+
+    <!-- Order form -->
+    <div class="order-form">
+      <h2>Order Coca-Cola</h2>
+      <div class="form-field">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+      </div>
+      <div class="form-field">
+        <label for="address">Address:</label>
+        <textarea id="address" rows="4" required></textarea>
+      </div>
+      <div class="form-field">
+        <label for="contact">Contact Number:</label>
+        <input type="tel" id="contact" required />
+      </div>
+      <div class="form-field">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" min="1" required />
+      </div>
+      <div>
+        <button class="order-button" onclick="order()">Order Now</button>
+      </div>
+      <div id="bill"></div>
+    </div>
+    <section class="history-section">
+      <div class="history-content">
+        <h2>Coca-Cola History</h2>
+        <p>
+          Coca-Cola is a carbonated soft drink that was invented in 1886 by John
+          S. Pemberton. It has a rich history...
+        </p>
+      </div>
+      <div class="history-images">
+        <img
+          class="fade-in"
+          src="coca-cola-image1.jpg"
+          alt="Coca-Cola Image 1"
+        />
+        <img
+          class="fade-in"
+          src="coca-cola-image2.jpg"
+          alt="Coca-Cola Image 2"
+        />
+        <!-- Add more images here -->
+      </div>
+    </section>
+
+    <script>
+      // JavaScript for fade-in on scroll
+      window.addEventListener("scroll", () => {
+        const historySection = document.querySelector(".history-section");
+        const historyImages = document.querySelectorAll(".history-images img");
+        const windowHeight = window.innerHeight;
+        const sectionTop = historySection.getBoundingClientRect().top;
+
+        if (sectionTop < windowHeight * 0.75) {
+          // Section is 75% visible in the viewport, trigger the animation
+          historySection.style.opacity = "1";
+          historySection.style.transform = "translateY(0)";
+
+          // Trigger the image fade-in animation
+          historyImages.forEach((img, index) => {
+            setTimeout(() => {
+              img.style.opacity = "1";
+              img.style.transform = "translateY(0)";
+            }, index * 200); // Delay each image by 200ms
+          });
+        }
+      });
+
+      // Add any JavaScript for interactivity here
+      function order() {
+        const name = document.getElementById("name").value;
+        const address = document.getElementById("address").value;
+        const contact = document.getElementById("contact").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const totalPrice = quantity * 2.5; // Assuming price per Coca-Cola is $2.50
+        const billElement = document.getElementById("bill");
+
+        // Validation
+        if (
+          name.trim() === "" ||
+          address.trim() === "" ||
+          contact.trim() === "" ||
+          isNaN(quantity) ||
+          quantity < 1
+        ) {
+          billElement.innerHTML = "<p>Please fill in all fields correctly.</p>";
+          return;
+        }
+
+        const bill = `
+                <h3>Order Summary:</h3>
+                <p>Name: ${name}</p>
+                <p>Address: ${address}</p>
+                <p>Contact Number: ${contact}</p>
+                <p>Quantity: ${quantity}</p>
+                <p>Total Price: $${totalPrice.toFixed(2)}</p>
+            `;
+
+        billElement.innerHTML = bill;
+
+        // Make the Coca-Cola image spin
+        const cocaColaBottle = document.querySelector(".coca-cola-bottle");
+        cocaColaBottle.classList.add("spin");
+      }
+    </script>
+  </body>
+</html>
