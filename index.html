@@ -15,13 +15,23 @@
       /* Basic styling */
       body {
         font-family: Arial, sans-serif;
-        background-color: #ff0000; /* Coca-Cola red */
+      }
+
+      /* Style for the video background */
+      video.video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1; /* Place the video behind all other content */
       }
 
       header {
-        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background for the header */
         padding: 20px;
         text-align: center;
+        position: relative; /* Ensure content inside header stays above video */
       }
 
       h1 {
@@ -32,19 +42,23 @@
       .coca-cola-bottle {
         width: 200px;
         position: absolute;
-        bottom: 15px;
+        bottom: -200px;
         left: 75%;
         transform: translateX(-50%);
         animation: float 4s ease-in-out infinite;
+        z-index: 2; /* Place the bottle above other content */
       }
 
       .ice-cubes {
         width: 200px;
         position: absolute;
-        bottom: 0;
+        bottom: -220px;
         left: 75%;
         transform: translateX(-50%);
+        z-index: 2; /* Place the ice cubes above other content */
       }
+
+      
 
       @keyframes float {
         0% {
@@ -56,6 +70,13 @@
         100% {
           transform: translateX(-50%) translateY(0);
         }
+      }
+
+      /* Style for the content container */
+      .content-container {
+        /* Remove position: relative; */
+        z-index: 1; /* Place above the video */
+        padding-top: 160px; /* Add space for the content above the form and images */
       }
 
       /* Interactive button */
@@ -81,23 +102,30 @@
 
       /* Form styles */
       .order-form {
-        max-width: 400px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-      }
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background for the form */
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 100px; /* Add margin to push the form down */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
 
       .form-field {
         margin-bottom: 10px;
       }
+
       /* CSS for the history section */
       .history-section {
         padding: 40px;
-        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background for the history section */
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.5s, transform 0.5s;
+        margin-top: 20px; /* Add margin to push the history section down */
       }
 
       .history-content {
@@ -134,102 +162,189 @@
           transform: translateY(0);
         }
       }
+      /* Style for the footer */
+footer {
+  background-color: #ff0000; /* Coca-Cola red */
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  display: inline;
+  margin-right: 15px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+
+      /* Style for the search bar and button */
+      #search {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-right: 5px;
+        z-index: 2; /* Place the search bar above other content */
+      }
+
+      /* Style for the search button */
+      button[type="button"] {
+        padding: 10px 20px;
+        background-color: #ff0000; /* Coca-Cola red */
+        color: #fff;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 2; /* Place the search button above other content */
+      }
+
+      /* Style for the search button on hover */
+      button[type="button"]:hover {
+        background-color: #cc0000; /* Slightly darker red on hover */
+      }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Welcome to Coca-Cola</h1>
-      <p>Enjoy the refreshing taste!</p>
-    </header>
+    <div style="position: relative;">
+      <video autoplay loop muted width="100%">
+        <source src="ezgif-4-ed0890ffe3.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-    <!-- Animated Coca-Cola bottle -->
-    <img
-      class="coca-cola-bottle"
-      style="width: 10%"
-      src="coca-cola-png-10978.png"
-      alt="Coca-Cola Bottle"
-    />
-    <img
-      src="Ice-Cube-PNG-Background.png"
-      alt="icecubes"
-      class="ice-cubes"
-      style="width: 50%"
-    />
+      <!-- Header (positioned absolute) -->
+      <header style="position: absolute; top: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, 0.7); padding: 20px; text-align: center;">
+        <h1>Welcome to Coca-Cola</h1>
+        <p>Enjoy the refreshing taste!</p>
+      </header>
 
-    <!-- Interactive order button -->
-    <button class="order-button">Login</button>
-    <button class="order-button">About us</button>
-    <button class="order-button">Contact</button>
+      <!-- Interactive order buttons -->
+      <div style="position: absolute; top: 20px; right: 20px;">
+        <input type="search" name="search" id="search" style="padding: 10px; border: none; border-radius: 5px; margin-right: 5px;" placeholder="Search..." />
+        <button type="button" style="padding: 10px 20px; background-color: #ff0000; color: #fff; font-size: 18px; border: none; border-radius: 5px; cursor: pointer;">Search</button>
+      </div>
 
-    <!-- Order form -->
-    <div class="order-form">
-      <h2>Order Coca-Cola</h2>
-      <div class="form-field">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required />
+      <div style="position: relative;">
+        <img src="backgouund-cocacola.jpg" alt="background" width="100%" style="position: absolute; top: 0; left: 0; z-index: -2;" />
       </div>
-      <div class="form-field">
-        <label for="address">Address:</label>
-        <textarea id="address" rows="4" required></textarea>
+
+      <!-- Order form -->
+      <div class="order-form fade-in-form">
+
+        <h2>Order Coca-Cola</h2>
+        <div class="form-field">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required />
+        </div>
+        <div class="form-field">
+          <label for="address">Address:</label>
+          <textarea id="address" rows="4" required></textarea>
+        </div>
+        <div class="form-field">
+          <label for="contact">Contact Number:</label>
+          <input type="tel" id="contact" required />
+        </div>
+        <div class="form-field">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" min="1" required />
+        </div>
+        <div>
+          <button class="order-button" onclick="order()">Order Now</button>
+        </div>
+        <div id="bill"></div>
       </div>
-      <div class="form-field">
-        <label for="contact">Contact Number:</label>
-        <input type="tel" id="contact" required />
-      </div>
-      <div class="form-field">
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" min="1" required />
-      </div>
-      <div>
-        <button class="order-button" onclick="order()">Order Now</button>
-      </div>
-      <div id="bill"></div>
+
+      <img class="coca-cola-bottle" style="width: 10%" src="coca-cola-png-10978.png" alt="Coca-Cola Bottle" />
+      <img src="Ice-Cube-PNG-Background.png" alt="icecubes" class="ice-cubes" style="width: 50%" />
     </div>
+
+    <div class="content-container">
+      <!-- Animated Coca-Cola bottle -->
+
+
+      
+
+     
+
+    <!-- History section -->
     <section class="history-section">
       <div class="history-content">
         <h2>Coca-Cola History</h2>
+        <!-- <hr/> -->
+        <pre>
+
+        </pre>
         <p>
-          Coca-Cola is a carbonated soft drink that was invented in 1886 by John
-          S. Pemberton. It has a rich history...
+          Coca-Cola, or Coke, is a carbonated soft drink manufactured by the Coca-Cola Company. In 2013, Coke products were sold in over 200 countries worldwide, with consumers drinking more than 1.8 billion company beverage servings each day.[1] Coca-Cola ranked No. 87 in the 2018 Fortune 500 list of the largest United States corporations by total revenue.[2] Based on Interbrand's "best global brand" study of 2020, Coca-Cola was the world's sixth most valuable brand.[3]
+
+Originally marketed as a temperance drink and intended as a patent medicine, it was invented in the late 19th century by John Stith Pemberton in Atlanta, Georgia. In 1888, Pemberton sold Coca-Cola's ownership rights to Asa Griggs Candler, a businessman, whose marketing tactics led Coca-Cola to its dominance of the global soft-drink market throughout the 20th and 21st century.[4] The drink's name refers to two of its original ingredients: coca leaves and kola nuts (a source of caffeine).[5] The current formula of Coca-Cola remains a closely guarded trade secret; however, a variety of reported recipes and experimental recreations have been published. The secrecy around the formula has been used by Coca-Cola in its marketing as only a handful of anonymous employees know the formula.[6] The drink has inspired imitators and created a whole classification of soft drink: colas.
+
+The Coca-Cola Company produces concentrate, which is then sold to licensed Coca-Cola bottlers throughout the world. The bottlers, who hold exclusive territory contracts with the company, produce the finished product in cans and bottles from the concentrate, in combination with filtered water and sweeteners. A typical 12-US-fluid-ounce (350 ml) can contains 38 grams (1.3 oz) of sugar (usually in the form of high-fructose corn syrup in North America). The bottlers then sell, distribute, and merchandise Coca-Cola to retail stores, restaurants, and vending machines throughout the world. The Coca-Cola Company also sells concentrate for soda fountains of major restaurants and foodservice distributors.
+
+The Coca-Cola Company has on occasion introduced other cola drinks under the Coke name. The most common of these is Diet Coke, along with others including Caffeine-Free Coca-Cola, Diet Coke Caffeine-Free, Coca-Cola Zero Sugar, Coca-Cola Cherry, Coca-Cola Vanilla, and special versions with lemon, lime, and coffee. Coca-Cola was called Coca-Cola Classic from July 1985 to 2009, to distinguish it from "New Coke".
         </p>
       </div>
       <div class="history-images">
-        <img
-          class="fade-in"
-          src="coca-cola-image1.jpg"
-          alt="Coca-Cola Image 1"
-        />
-        <img
-          class="fade-in"
-          src="coca-cola-image2.jpg"
-          alt="Coca-Cola Image 2"
-        />
+        <img class="fade-in" src="building.webp" alt="Coca-Cola Image 1" />
+        <img class="fade-in" src="manufacturing.webp" alt="Coca-Cola Image 2" />
         <!-- Add more images here -->
       </div>
     </section>
-
+  </div>
     <script>
       // JavaScript for fade-in on scroll
-      window.addEventListener("scroll", () => {
-        const historySection = document.querySelector(".history-section");
-        const historyImages = document.querySelectorAll(".history-images img");
-        const windowHeight = window.innerHeight;
-        const sectionTop = historySection.getBoundingClientRect().top;
+      // JavaScript for fade-in on scroll
+window.addEventListener("scroll", () => {
+  const historySection = document.querySelector(".history-section");
+  const historyImages = document.querySelectorAll(".history-images img");
+  const orderForm = document.querySelector(".order-form");
+  const windowHeight = window.innerHeight;
+  const sectionTop = historySection.getBoundingClientRect().top;
 
-        if (sectionTop < windowHeight * 0.75) {
-          // Section is 75% visible in the viewport, trigger the animation
-          historySection.style.opacity = "1";
-          historySection.style.transform = "translateY(0)";
+  if (sectionTop < windowHeight * 0.75) {
+    // Section is 75% visible in the viewport, trigger the animation
+    historySection.style.opacity = "1";
+    historySection.style.transform = "translateY(0)";
 
-          // Trigger the image fade-in animation
-          historyImages.forEach((img, index) => {
-            setTimeout(() => {
-              img.style.opacity = "1";
-              img.style.transform = "translateY(0)";
-            }, index * 200); // Delay each image by 200ms
-          });
-        }
-      });
+    // Trigger the image fade-in animation
+    historyImages.forEach((img, index) => {
+      setTimeout(() => {
+        img.style.opacity = "1";
+        img.style.transform = "translateY(0)";
+      }, index * 200); // Delay each image by 200ms
+    });
+  }
+
+  const formTop = orderForm.getBoundingClientRect().top;
+  if (formTop < windowHeight * 0.75) {
+    // Form is 75% visible in the viewport, trigger the animation
+    orderForm.style.opacity = "1";
+    orderForm.style.transform = "translateY(0)";
+  }
+});
+
 
       // Add any JavaScript for interactivity here
       function order() {
@@ -268,5 +383,16 @@
         cocaColaBottle.classList.add("spin");
       }
     </script>
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2023 Coca-Cola. All rights reserved.</p>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </footer>
+    
   </body>
 </html>
